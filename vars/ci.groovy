@@ -8,31 +8,31 @@ def call() {
         stages {
 
             stage('compile/build') {
-                steps{
+                steps {
                     echo 'compile'
                 }
             }
 
             stage('unit tests') {
-                steps{
+                steps {
                     echo 'unit tests'
                 }
             }
 
             stage('quality control') {
-                steps{
+                steps {
                     echo 'quality control'
                 }
             }
-            stage('upload code to centralised place'){
-                steps{
+            stage('upload code to centralised place') {
+                steps {
                     echo 'upload'
                 }
             }
 
         }
 
+    }
+
+
 }
-
-
-
