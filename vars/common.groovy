@@ -12,7 +12,11 @@ if(app_lang == "nodejs") {
 def unittests() {
     if(app_lang == "nodejs") {
         // developer is missing unit test cases in our project,we need to add them as best practice,we are skipping to proceed further
-        sh 'npm test || true'
+       try {
+           sh 'npm test'
+       } catch(Exception g){
+           common.email("unit tests failed")
+       }
 
     }
     if (app_lang == "maven") {
@@ -23,4 +27,7 @@ def unittests() {
         sh "python3 -m unittest"
     }
 
+}
+def email(email_note) {
+    sh 'echo ${email_note}'
 }
