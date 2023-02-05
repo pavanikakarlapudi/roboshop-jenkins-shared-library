@@ -1,4 +1,5 @@
 def call() {
+    try {
     pipeline {
 
         agent {
@@ -39,4 +40,7 @@ def call() {
     }
 
 
-}
+}catch(Exception g) {
+      common.email("failed")
+    }
+    }
