@@ -15,7 +15,7 @@ def unittests() {
        try {
            sh 'npm test'
        } catch(Exception g){
-           common.email("unit tests failed")
+           email("unit tests failed")
        }
 
     }
