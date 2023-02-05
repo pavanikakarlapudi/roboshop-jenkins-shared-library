@@ -27,8 +27,8 @@ def call() {
             stage('quality control') {
                 environment {
 
-                    SONAR_USER = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.user --with-decryption --querry parameters[0].value | sed \"s/"//g\')'
-                    SONAR_PASS = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.pass --with-decryption --querry parameters[0].value | sed \"s/"//g\')'
+                    SONAR_USER = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.user --with-decryption --query parameters[0].value | sed \"s/"//g\')'
+                    SONAR_PASS = '$(aws ssm get-parameters --region us-east-1 --names sonarqube.pass --with-decryption --query parameters[0].value | sed \"s/"//g\')'
                 }
                 steps {
 
