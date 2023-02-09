@@ -3,6 +3,11 @@ def call() {
     if(!env.SONAR_EXTRA_OPTS) {
         env.SONAR_EXTRA_OPTS = " "
     }
+
+    if(!env.extraFiles) {
+        env.extraFiles = " "
+    }
+
     if(!env.TAG_NAME) {
         env.PUSH_CODE = "false"
     } else {
@@ -35,6 +40,11 @@ def call() {
                 }
             }
 
+            if (app_lang == "maven") {
+                stage('Build Package') {
+                    sh "mvn package && cp target/${component}-1.0.jar ${component}.jar"
+                }
+            }
 
             if(env.PUSH_CODE == "true") {
                 stage('Upload Code to Centralized Place') {
@@ -42,21 +52,10 @@ def call() {
                 }
             }
 
+
         }
 
     } catch(Exception e) {
         common.email("Failed")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
