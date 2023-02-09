@@ -4,7 +4,7 @@ def compile() {
     }
 
     if (app_lang == "maven") {
-        sh "mvn clean compile"
+        sh "mvn package && cp target/${component}-1.0.jar ${component}.jar"
     }
 
 }
@@ -53,4 +53,3 @@ def artifactPush() {
 
 }
 
-//hello
