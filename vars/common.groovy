@@ -6,6 +6,12 @@ def compile() {
     if (app_lang == "maven") {
         sh "mvn package && cp target/${component}-1.0.jar ${component}.jar"
     }
+    if (app_lang == "golang") {
+        sh 'go mod init dispatch'
+        sh 'go get''
+        sh 'go build'
+
+    }
 
 }
 
@@ -23,6 +29,9 @@ def unittests() {
 
     if (app_lang == "python") {
         sh 'python3 -m unittest'
+    }
+    if (app_lang == "golang") {
+        sh 'go test'
     }
 }
 
@@ -42,6 +51,10 @@ def artifactPush() {
     }
 
     if (app_lang == "maven") {
+        sh "zip -r ${component}-${TAG_NAME}.zip * ${component}.jar VERSION ${extraFiles}"
+    }
+
+    if (app_lang == "golang") {
         sh "zip -r ${component}-${TAG_NAME}.zip * ${component}.jar VERSION ${extraFiles}"
     }
 
